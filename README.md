@@ -4,6 +4,7 @@
 
 class Sport:
     """Класс, который показывает различные виды спорта в конторе."""
+    
     def __init__(self, name):
         self.name = name
         self.leagues = []
@@ -18,6 +19,7 @@ class Sport:
 
 class League:
     """Класс, который показывает лигу в конкретном виде спорта."""
+    
     def __init__(self, name):
         self.name = name
         self.events = []
@@ -28,6 +30,7 @@ class League:
 
 class Event:
     """Класс представляющий спортивное событие."""
+    
     def __init__(self, name, odds, league):
         self.name = name
         self.odds = odds
@@ -36,6 +39,7 @@ class Event:
 
 class Bookmaker:
     """Класс самой конторы, он нужен для составления списка видов спорта."""
+    
     def __init__(self):
         self.sports = []
 
@@ -45,12 +49,14 @@ class Bookmaker:
 
 class User:
     """Для информации о пользователе."""
+    
     def __init__(self, name, balance):
         self.name = name
         self.balance = balance
 
 class App:
     """Для визуальзации."""
+    
     def __init__(self, root, bookmaker, user):
         self.root = root
         self.bookmaker = bookmaker
