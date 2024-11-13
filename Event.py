@@ -71,46 +71,48 @@ class Event:
 
 
 La_Liga = ["Barcelona", "Real_Madrid", "Athletico_Madrid", "Seville", "Athletic", "Real_Sostedad", "Girona", "Villareal"]
-a = []
+calendar_La_Liga = []
 
 English_premier_league = ["Arsenal", "Manchester_City", "Liverpool", "Chelsea", "Tottenham",
                           "Manchester_United", "Brighton", "New_Castle"]
-b = []
+calendar_English_premier_league = []
 
 Seria_A = ["Inter", "Milan", "Juventus", "Napoli", "Roma",
            "Lazio", "Atalanta", "Fiorentina"]
-c = []
+calendar_Seria_A = []
 
 Bundesliga = ["Bayer_Munich", "Bayer_Leverkusen", "Borussia_Dortmund", "Leipzig", "Stuttgart",
               "Eintracht", "Union", "Freiburg"]
-d = []
+calendar_Bundesliga = []
 
 Ligue_1 = ["Paris_Saint-Germain", "Monaco", "Marseilles", "Lion", "Ren",
               "Lill", "Nice", "Brest"]
-e = []
+calendar_Ligue_1 = []
 
 NBA = ["Lakers", "Warriors", "Boston", "Clippers", "Denver", "Bucks", "Chicago", "Dallas"]
 
-f =[]
+calendar_NBA =[]
 
 for i in range (len(Event.Events)):
-    a.append([La_Liga[Event.Events[i][0]],La_Liga[Event.Events[i][1]]])
+    calendar_La_Liga.append([La_Liga[Event.Events[i][0]],La_Liga[Event.Events[i][1]]])
 
-    b.append([English_premier_league[Event.Events[i][0]],English_premier_league[Event.Events[i][1]]])
+    calendar_English_premier_league.append([English_premier_league[Event.Events[i][0]],English_premier_league[Event.Events[i][1]]])
 
-    c.append([Seria_A[Event.Events[i][0]], Seria_A[Event.Events[i][1]]])
+    calendar_Seria_A.append([Seria_A[Event.Events[i][0]], Seria_A[Event.Events[i][1]]])
 
-    d.append([Bundesliga[Event.Events[i][0]], Bundesliga[Event.Events[i][1]]])
+    calendar_Bundesliga.append([Bundesliga[Event.Events[i][0]], Bundesliga[Event.Events[i][1]]])
 
-    e.append([Ligue_1[Event.Events[i][0]], Ligue_1[Event.Events[i][1]]])
+    calendar_Ligue_1.append([Ligue_1[Event.Events[i][0]], Ligue_1[Event.Events[i][1]]])
 
-    f.append([NBA[Event.Events[i][0]], NBA[Event.Events[i][1]]])
+    calendar_NBA.append([NBA[Event.Events[i][0]], NBA[Event.Events[i][1]]])
 
     # Генератор расписания в лигах.
-"""print(a)
-print(b)
-print(c)
-print(d)
-print(e)
-print(f)"""
+"""
+print(calendar_La_Liga)
+print(calendar_English_premier_league)
+print(calendar_Seria_A)
+print(calendar_Bundesliga)
+print(calendar_Ligue_1)
+print(calendar_NBA)
+"""
 

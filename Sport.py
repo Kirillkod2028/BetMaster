@@ -3,6 +3,8 @@ class Sport:
     def __init__(self, name):
         self.name = name
         self.sport = []
+    Sport_Number = 8
+
 
 
 
@@ -11,4 +13,4 @@ class Sport:
         return self.sport
     Sports = ["Football", "Basketball"] #список видов спорта
 
-    Round = ["Round_1", "Round_2", "Round_3", "Round_4", "Round_5", "Round_6", "Round_7"] #список туров
+    Round = [f"Round_{i}" for i in range(1, Sport_Number)] #список туров

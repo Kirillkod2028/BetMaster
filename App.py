@@ -1,22 +1,42 @@
 import tkinter as tk
 from tkinter import messagebox
 from League import *
-from Sport import *
+from Sport import Sport
 from Event import *
 from Screen import *
 
 
 class App:
-    """Для визуальзации."""
+    """Класс для визуализации приложения ставок.
 
+    Этот класс отвечает за создание графического интерфейса для взаимодействия
+    пользователя с букмекером, включая выбор спорта, лиги и размещение ставок.
+    """
+
+    # Функция нужна для того, чтобы использовать функции, тогда когда они нужны.
     def closure(self, func, *args, **kwargs):
+        """Создает обертку для функции, чтобы ее можно было вызывать позже.
+                Args:
+                    func: Функция, которую нужно обернуть.
+                    *args: Позиционные аргументы для функции.
+                    **kwargs: Именованные аргументы для функции.
+                Returns:
+                    Функция-обертка, которая вызывает исходную функцию с заданными аргументами.
+                """
         def wrapper():
             result = func(*args, **kwargs)
             return result
 
         return wrapper
-    # Функция замыкания для обертки функции с аргументами для последующего выполнения.
+
     def __init__(self, root, bookmaker, user, team_strength):
+        """Инициализирует приложение.
+                Args:
+                    root: окно приложения.
+                    bookmaker: Объект букмекера.
+                    user: Объект пользователя.
+                    team_strength: Словарь с силами команд.
+                """
         self.bookmaker = bookmaker
         self.user = user
         self.root = root
@@ -34,6 +54,11 @@ class App:
         self.buttons = [self.button]
 
     def display_screen(self, screen, name):
+        """Отображает экран в зависимости от выбора пользователя.
+                Args:
+                    screen: Объект экрана, который нужно отобразить.
+                    name: Имя текущего экрана.
+                """
         self.path.append(name)
         for i in self.buttons:
             i.destroy()
@@ -62,6 +87,12 @@ class App:
     # Функция для отображения выбранного экрана в зависимости от выбора пользователя.
 
     def screen_by_sport_id(self, id):
+        """Создает экран на основе идентификатора спорта.
+                Args:
+                    id: Идентификатор спорта.
+                Returns:
+                    Объект экрана с лигами для выбранного спорта.
+                """
         screen = Screen(len(League.LeaguesSep[id]),
                         [self.generate_screen_round(League.LeaguesSepMatches[id][i]) for i in
                          range(len(League.LeaguesSep[id]))],
@@ -71,14 +102,20 @@ class App:
 
     # Функция для создания экрана на основе id спорта.
     def generate_screen_round(self, obj):
-        screen = Screen(7, [self.generate_screen_matches(obj, i) for i in range(7)],
-                        [Sport.Round[i] for i in range(7)], 0)
+        """Создает экран для туров на основе объекта лиги.
+                Args:
+                    obj: Объект лиги.
+                Returns:
+                    Объект экрана с турами для выбранной лиги.
+                """
+        screen = Screen(Sport.Sport_Number - 1, [self.generate_screen_matches(obj, i) for i in range(Sport.Sport_Number - 1)],
+                        [Sport.Round[i] for i in range(Sport.Sport_Number - 1)], 0)
         return screen
 
     # Функция для генерации экрана для туров.
     def generate_screen_matches(self, obj, num):
-        screen = Screen(4, [self.generate_bet_screen(obj[i]) for i in range(num * 4, num * 4 + 4)],
-                        [obj[i] for i in range(num * 4, num * 4 + 4)], 0)
+        screen = Screen(Sport.Sport_Number // 2, [self.generate_bet_screen(obj[i]) for i in range(num * Sport.Sport_Number // 2, num * Sport.Sport_Number // 2 + Sport.Sport_Number // 2)],
+                        [obj[i] for i in range(num * Sport.Sport_Number // 2, num * Sport.Sport_Number // 2 + Sport.Sport_Number // 2)], 0)
 
         return screen
 
@@ -86,10 +123,10 @@ class App:
 
 
     def generate_bet_screen(self,match):
-        strA = self.team_strength[match[0]] #Считываем силу команды A
-        strB = self.team_strength[match[1]] #Cчитываем силу команды B
-        coefA = round((strA + strB) * 1.5 / strA,2) #Рассчитываем коэффициент на победу команды A
-        coefB = round((strA + strB) * 1.5 / strB,2) #Рассчитываем коэффициент на победу команды B
+        strong_A = self.team_strength[match[0]] #Считываем силу команды A
+        strong_B = self.team_strength[match[1]] #Cчитываем силу команды B
+        coefA = round((strong_A + strong_B) * 1.5 / strong_A,2) #Рассчитываем коэффициент на победу команды A
+        coefB = round((strong_A + strong_B) * 1.5 / strong_B,2) #Рассчитываем коэффициент на победу команды B
         coefC = round(1/(1 - (1/coefA) - (1/coefB)),2) #Рассчитываем коэффициент на ничью
         screen = Screen(3,[self.closure(self.open_bet_window,Event(match[0] + " vs " + match[1],0,0)) for i in range(3)] ,[match[0] + " wins " + str(coefA), "draw " + str(coefC), match[1] + " wins " + str(coefB)],-1)
         return screen
@@ -131,3 +168,4 @@ class App:
 
         bet_button = tk.Button(bet_window, text="Сделать ставку", command=place_bet)
         bet_button.pack(pady=10)
+

@@ -1,6 +1,6 @@
 class Screen:
     """Класс для предоставления экрана с вариантами выбора."""
-    def __init__(self, num, obj, names, final):
+    def __init__(self, num, obj, names, final, parent=None):
         self.num = num # Сохраняем количество вариантов на экране.
         self.obj = obj # Сохраняем объекты, соответствующие вариантам
         self.names = names # Сохраняем имена вариантов, которые будут отображаться на экране.
